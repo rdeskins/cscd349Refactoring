@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Title: Dungeon.java
  *
@@ -45,12 +47,14 @@
 */
 public class Dungeon
 {
+	static Scanner kb = new Scanner(System.in);
+
     public static void main(String[] args)
 	{
 
 		Hero theHero;
 		Monster theMonster;
-
+		
 		do
 		{
 		    theHero = chooseHero();
@@ -75,18 +79,21 @@ this task
 					       "1. Warrior\n" +
 						   "2. Sorceress\n" +
 						   "3. Thief");
-		choice = Keyboard.readInt();
-
+		choice = kb.nextInt();
+		kb.nextLine();
+		String name;
+		System.out.print("Enter character name: ");
+		name = kb.nextLine();
 		switch(choice)
 		{
-			case 1: return new Warrior();
+			case 1: return new Warrior(name);
 
-			case 2: return new Sorceress();
+			case 2: return new Sorceress(name);
 
-			case 3: return new Thief();
+			case 3: return new Thief(name);
 
 			default: System.out.println("invalid choice, returning Thief");
-				     return new Thief();
+				     return new Thief(name);
 		}//end switch
 	}//end chooseHero method
 
@@ -119,12 +126,12 @@ true if the user chooses to continue, false otherwise.
 ---------------------------------------------------------------------*/
 	public static boolean playAgain()
 	{
-		char again;
+		String again;
 
 		System.out.println("Play again (y/n)?");
-		again = Keyboard.readChar();
-
-		return (again == 'Y' || again == 'y');
+		again = kb.next();
+		
+		return (again.equals('Y') || again.equals('y'));
 	}//end playAgain method
 
 
@@ -136,16 +143,16 @@ user has the option of quitting.
 ---------------------------------------------------------------------*/
 	public static void battle(Hero theHero, Monster theMonster)
 	{
-		char pause = 'p';
+		String pause = "p";
 		System.out.println(theHero.getName() + " battles " +
 							theMonster.getName());
 		System.out.println("---------------------------------------------");
 
 		//do battle
-		while (theHero.isAlive() && theMonster.isAlive() && pause != 'q')
+		while (theHero.isAlive() && theMonster.isAlive() && !pause.equals("q"))
 		{
 		    //hero goes first
-			theHero.battleChoices(theMonster);
+			theHero.battleChoices(theMonster,kb);
 
 			//monster's turn (provided it's still alive!)
 			if (theMonster.isAlive())
@@ -153,7 +160,7 @@ user has the option of quitting.
 
 			//let the player bail out if desired
 			System.out.print("\n-->q to quit, anything else to continue: ");
-			pause = Keyboard.readChar();
+			pause = kb.next();
 
 		}//end battle loop
 
