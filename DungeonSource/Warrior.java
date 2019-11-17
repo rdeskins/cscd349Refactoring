@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /**
  * Title:
@@ -15,10 +15,10 @@
 public class Warrior extends Hero
 {
 
-    public Warrior()
+    public Warrior(Scanner kb)
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2);
+		super("Warrior", 125, 4, .8, 35, 60, .2,kb);
 
 
     }//end constructor
@@ -62,7 +62,7 @@ public class Warrior extends Hero
 		    System.out.println("1. Attack Opponent");
 		    System.out.println("2. Crushing Blow on Opponent");
 		    System.out.print("Choose an option: ");
-		    choice = Keyboard.readInt();
+		    choice = kb.nextInt();
 
 		    switch (choice)
 		    {
