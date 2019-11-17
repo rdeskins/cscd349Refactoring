@@ -32,18 +32,17 @@ public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
 	protected int numTurns;
-	protected Scanner kb;
+	
+
 
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
   public Hero(String name, int hitPoints, int attackSpeed,
 				     double chanceToHit, int damageMin, int damageMax,
-					 double chanceToBlock, Scanner kb)
+					 double chanceToBlock, String namePI)
   {
-	super(name, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
+	super(namePI, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
 	this.chanceToBlock = chanceToBlock;
-	this.kb = kb;
-	readName();
   }
 
 /*-------------------------------------------------------
@@ -55,11 +54,6 @@ Returns: nothing
 This method calls: nothing
 This method is called by: hero constructor
 ---------------------------------------------------------*/
-  public void readName()
-  {
-		System.out.print("Enter character name: ");
-		name = kb.nextLine();
-  }//end readName method
 
 /*-------------------------------------------------------
 defend determines if hero blocks attack
@@ -114,7 +108,7 @@ Returns: nothing
 This method calls: getAttackSpeed()
 This method is called by: external sources
 ---------------------------------------------------------*/
-	public void battleChoices(DungeonCharacter opponent)
+	public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
 	    numTurns = attackSpeed/opponent.getAttackSpeed();
 

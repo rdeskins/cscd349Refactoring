@@ -17,9 +17,9 @@ public class Sorceress extends Hero
 	public final int MAX_ADD = 50;
 
 //-----------------------------------------------------------------
-    public Sorceress(Scanner kb)
+    public Sorceress(String name)
 	{
-		super("Sorceress", 75, 5, .7, 25, 50, .3,kb);
+		super("Sorceress", 75, 5, .7, 25, 50, .3,name);
 
 
     }//end constructor
@@ -47,9 +47,9 @@ public class Sorceress extends Hero
 	}//end override of attack method
 
 //-----------------------------------------------------------------
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		super.battleChoices(opponent);
+		super.battleChoices(opponent,kb);
 		int choice;
 
 		do

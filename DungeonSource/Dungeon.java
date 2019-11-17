@@ -81,17 +81,19 @@ this task
 						   "3. Thief");
 		choice = kb.nextInt();
 		kb.nextLine();
-
+		String name;
+		System.out.print("Enter character name: ");
+		name = kb.nextLine();
 		switch(choice)
 		{
-			case 1: return new Warrior(kb);
+			case 1: return new Warrior(name);
 
-			case 2: return new Sorceress(kb);
+			case 2: return new Sorceress(name);
 
-			case 3: return new Thief(kb);
+			case 3: return new Thief(name);
 
 			default: System.out.println("invalid choice, returning Thief");
-				     return new Thief(kb);
+				     return new Thief(name);
 		}//end switch
 	}//end chooseHero method
 
@@ -150,7 +152,7 @@ user has the option of quitting.
 		while (theHero.isAlive() && theMonster.isAlive() && !pause.equals("q"))
 		{
 		    //hero goes first
-			theHero.battleChoices(theMonster);
+			theHero.battleChoices(theMonster,kb);
 
 			//monster's turn (provided it's still alive!)
 			if (theMonster.isAlive())

@@ -15,10 +15,10 @@ import java.util.Scanner;
 public class Warrior extends Hero
 {
 
-    public Warrior(Scanner kb)
+    public Warrior(String name)
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2,kb);
+		super("Warrior", 125, 4, .8, 35, 60, .2,name);
 
 
     }//end constructor
@@ -51,11 +51,11 @@ public class Warrior extends Hero
 
 
 
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
 		int choice;
 
-		super.battleChoices(opponent);
+		super.battleChoices(opponent, kb);
 
 		do
 		{

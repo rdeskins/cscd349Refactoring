@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class Thief extends Hero
 {
 
-    public Thief(Scanner kb)
+    public Thief(String name)
 	{
-		super("Thief", 75, 6, .8, 20, 40, .5,kb);
+		super("Thief", 75, 6, .8, 20, 40, .5,name);
 
 
     }//end constructor
@@ -41,9 +41,9 @@ public class Thief extends Hero
 	}//end surpriseAttack method
 
 
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
-		super.battleChoices(opponent);
+		super.battleChoices(opponent,kb);
 		int choice;
 
 
