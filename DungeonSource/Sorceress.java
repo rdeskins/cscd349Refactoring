@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /**
  * Title:
@@ -17,9 +17,9 @@ public class Sorceress extends Hero
 	public final int MAX_ADD = 50;
 
 //-----------------------------------------------------------------
-    public Sorceress()
+    public Sorceress(String name)
 	{
-		super("Sorceress", 75, 5, .7, 25, 50, .3);
+		super("Sorceress", 75, 5, .7, 25, 50, .3,name);
 
 
     }//end constructor
@@ -47,9 +47,9 @@ public class Sorceress extends Hero
 	}//end override of attack method
 
 //-----------------------------------------------------------------
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		super.battleChoices(opponent);
+		super.battleChoices(opponent,kb);
 		int choice;
 
 		do
@@ -57,7 +57,7 @@ public class Sorceress extends Hero
 		    System.out.println("1. Attack Opponent");
 		    System.out.println("2. Increase Hit Points");
 		    System.out.print("Choose an option: ");
-		    choice = Keyboard.readInt();
+		    choice = kb.nextInt(); 
 
 		    switch (choice)
 		    {

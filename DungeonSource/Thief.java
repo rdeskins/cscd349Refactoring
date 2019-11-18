@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /**
  * Title:
@@ -12,10 +12,9 @@
 public class Thief extends Hero
 {
 
-    public Thief()
+    public Thief(String name)
 	{
-		super("Thief", 75, 6, .8, 20, 40, .5);
-
+		super("Thief", 75, 6, .8, 20, 40, .5,name);
 
 
     }//end constructor
@@ -42,9 +41,9 @@ public class Thief extends Hero
 	}//end surpriseAttack method
 
 
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
-		super.battleChoices(opponent);
+		super.battleChoices(opponent,kb);
 		int choice;
 
 
@@ -53,7 +52,7 @@ public class Thief extends Hero
 		    System.out.println("1. Attack Opponent");
 		    System.out.println("2. Surprise Attack");
 		    System.out.print("Choose an option: ");
-		    choice = Keyboard.readInt();
+		    choice = kb.nextInt();
 
 		    switch (choice)
 		    {
