@@ -58,7 +58,7 @@ public class Dungeon
 		do
 		{
 		    theHero = chooseHero();
-		    theMonster = generateMonster();
+		    theMonster = MonsterFactory.createMonster();
 			battle(theHero, theMonster);
 
 		} while (playAgain());
@@ -86,39 +86,16 @@ this task
 		name = kb.nextLine();
 		switch(choice)
 		{
-			case 1: return new Warrior(name);
+			case 1: return HeroFactory.createHero("Warrior", name);
 
-			case 2: return new Sorceress(name);
+			case 2: return HeroFactory.createHero("Sorceress", name);
 
-			case 3: return new Thief(name);
+			case 3: return HeroFactory.createHero("Thief", name);
 
 			default: System.out.println("invalid choice, returning Thief");
-				     return new Thief(name);
+			return HeroFactory.createHero("Thief", name);
 		}//end switch
 	}//end chooseHero method
-
-/*-------------------------------------------------------------------
-generateMonster randomly selects a Monster and returns it.  It utilizes
-a polymorphic reference (Monster) to accomplish this task.
----------------------------------------------------------------------*/
-	public static Monster generateMonster()
-	{
-		int choice;
-
-		choice = (int)(Math.random() * 3) + 1;
-
-		switch(choice)
-		{
-			case 1: return new Ogre();
-
-			case 2: return new Gremlin();
-
-			case 3: return new Skeleton();
-
-			default: System.out.println("invalid choice, returning Skeleton");
-				     return new Skeleton();
-		}//end switch
-	}//end generateMonster method
 
 /*-------------------------------------------------------------------
 playAgain allows gets choice from user to play another game.  It returns
