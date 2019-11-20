@@ -20,61 +20,56 @@ public class Sorceress extends Hero
     public Sorceress(String name)
 	{
 		super("Sorceress", 75, 5, .7, 25, 50, .3,name);
-
-
+		
+		//Adds Sorceress attacks to AttackBehavior array
+		AttackBehavior[] sorceressAttacks = {new SorceressAttackBehavior(), new SorceressIncreaseHitpointsBehavior()};
+		//Sets sorceress attack behaviors array
+		this.setAttackBehaviors(sorceressAttacks);
     }//end constructor
 
-//-----------------------------------------------------------------
-	public void increaseHitPoints()
-    {
-	    int hPoints;
-
-		hPoints = (int)(Math.random() * (MAX_ADD - MIN_ADD + 1)) + MIN_ADD;
-		addHitPoints(hPoints);
-		System.out.println(name + " added [" + hPoints + "] points.\n"
-							+ "Total hit points remaining are: "
-							+ hitPoints);
-		 System.out.println();
-
-    }//end increaseHitPoints method
-
-//-----------------------------------------------------------------
 	public void attack(DungeonCharacter opponent)
 	{
-		System.out.println(name + " casts a spell of fireball at " +
-							opponent.getName() + ":");
-		super.attack(opponent);
+		
+		//This attack is set at runtime when user chooses which attack to use
+		this.attackBehavior.attack(this, name, opponent);
 	}//end override of attack method
-
+    
 //-----------------------------------------------------------------
     public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		super.battleChoices(opponent,kb);
 		int choice;
+
+		super.battleChoices(opponent, kb);
 
 		do
 		{
-		    System.out.println("1. Attack Opponent");
-		    System.out.println("2. Increase Hit Points");
-		    System.out.print("Choose an option: ");
-		    choice = kb.nextInt(); 
+			
+			//Iterates through available attacks for user to choose from
+			for(int i = 0; i < attackBehaviors.length; i++)
+				System.out.println(i + 1 + ". " + attackBehaviors[i]);
 
-		    switch (choice)
-		    {
-			    case 1: attack(opponent);
-			        break;
-			    case 2: increaseHitPoints();
-			        break;
-			    default:
-			        System.out.println("invalid choice!");
-		    }//end switch
+			choice = kb.nextInt();
 
-			numTurns--;
-		    if (numTurns > 0)
-			    System.out.println("Number of turns remaining is: " + numTurns);
+			//While the choice is outside of the range of the possible attacks array
+			while(choice < 0 || choice > attackBehaviors.length)
+			{
+				System.out.println("invalid choice!");
+				System.out.print("Enter your choice: ");
+				choice = kb.nextInt();
+			}
 
-		} while(numTurns > 0 && hitPoints > 0 && opponent.getHitPoints() > 0);
+			//Sets attackBehavior to array index that user chose
+			this.attackBehavior = attackBehaviors[choice - 1];
 
-    }//end overridden method
+			
+			//Calls Sorceress.attack(), passing opponent as a parameter
+			this.attack(opponent);
 
+			this.numTurns--;
+			if (numTurns > 0)
+				System.out.println("Number of turns remaining is: " + numTurns);
+
+		} while(numTurns > 0);
+
+    }//end battleChoices method
 }//end class

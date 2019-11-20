@@ -41,6 +41,10 @@ public abstract class DungeonCharacter implements Comparable
 	protected int attackSpeed;
 	protected double chanceToHit;
 	protected int damageMin, damageMax;
+	//Doug Doner note: Adds AttackBehavior array to DungeonCharacter class
+	protected AttackBehavior[] attackBehaviors;
+	//Doug Doner note: Adds AttackBehavior for concrete class to set at runtime
+	protected AttackBehavior attackBehavior;
 
 	public int compareTo(Object o)
 	{
@@ -80,8 +84,25 @@ public abstract class DungeonCharacter implements Comparable
 		return attackSpeed;
 	}//end getAttackSpeed
 
+	public void setAttackBehaviors(final AttackBehavior[] attacks) {
+		this.attackBehaviors = attacks;
+	}
 
-/*-------------------------------------------------------
+	
+	
+	public double getChanceToHit() {
+		return chanceToHit;
+	}
+
+	public int getDamageMin() {
+		return damageMin;
+	}
+
+	public int getDamageMax() {
+		return damageMax;
+	}
+
+	/*-------------------------------------------------------
 addHitPoints is used to increment the hitpoints a dungeon character has
 
 Receives: number of hit points to add
