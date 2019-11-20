@@ -3,15 +3,15 @@ public class HeroFactory {
 	public static Hero createHero(String type,String name)
 	{
 		Hero hero = null;
-		if(type == "Sorceress")
+		if(type.equals("Sorceress"))
 		{
 			hero = new Sorceress(name);
 		}
-		else if(type == "Thief")
+		else if(type.equals("Thief"))
 		{
 			hero = new Thief(name);
 		}
-		else if(type == "Warrior")
+		else if(type.equals("Warrior"))
 		{
 			hero = new Warrior(name);
 		}

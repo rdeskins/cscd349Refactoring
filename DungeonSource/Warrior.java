@@ -15,10 +15,10 @@ import java.util.Scanner;
 public class Warrior extends Hero
 {
 
-    public Warrior(String kb)
+    public Warrior(String name)
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2,kb);
+		super("Warrior", 125, 4, .8, 35, 60, .2,name );
 
 
     }//end constructor
