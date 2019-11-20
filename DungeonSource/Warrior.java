@@ -18,7 +18,7 @@ public class Warrior extends Hero
     public Warrior(String name)
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2,name);
+		super("Warrior", 125, 4, .8, 35, 60, .2,name );
 
 
     }//end constructor
