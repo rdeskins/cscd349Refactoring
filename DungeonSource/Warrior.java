@@ -40,7 +40,7 @@ public class Warrior extends Hero
 
     public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		int choice;
+		int choice = -1;
 
 		super.battleChoices(opponent, kb);
 
@@ -51,19 +51,27 @@ public class Warrior extends Hero
 			for(int i = 0; i < attackBehaviors.length; i++)
 				System.out.println(i + 1 + ". " + attackBehaviors[i]);
 
-			choice = kb.nextInt();
-
+			
+			//While the choice is outside of the range of the possible attacks array
 			while(choice < 0 || choice > attackBehaviors.length)
 			{
-				System.out.println("invalid choice!");
-				System.out.print("Enter your choice: ");
-				choice = kb.nextInt();
+				try
+				{
+					System.out.print("Enter your choice: ");
+					choice = Integer.parseInt(kb.next());
+					kb.nextLine();
+				}
+				catch(Exception e)
+				{
+					System.out.println("invalid choice!");
+				}
 			}
 
 			//Sets attackBehavior to array index that user chose
 			this.attackBehavior = attackBehaviors[choice - 1];
 
-			//Calls Warrior.attack(), passing opponent as a parameter
+			
+			//Calls Sorceress.attack(), passing opponent as a parameter
 			this.attack(opponent);
 
 			this.numTurns--;

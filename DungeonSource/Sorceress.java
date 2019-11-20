@@ -18,7 +18,7 @@ public class Sorceress extends Hero
 
 //-----------------------------------------------------------------
     public Sorceress(String name)
-	{
+	{	
 		super("Sorceress", 75, 5, .7, 25, 50, .3,name);
 		
 		//Adds Sorceress attacks to AttackBehavior array
@@ -37,7 +37,7 @@ public class Sorceress extends Hero
 //-----------------------------------------------------------------
     public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		int choice;
+		int choice = -1;
 
 		super.battleChoices(opponent, kb);
 
@@ -48,14 +48,20 @@ public class Sorceress extends Hero
 			for(int i = 0; i < attackBehaviors.length; i++)
 				System.out.println(i + 1 + ". " + attackBehaviors[i]);
 
-			choice = kb.nextInt();
-
+			
 			//While the choice is outside of the range of the possible attacks array
 			while(choice < 0 || choice > attackBehaviors.length)
 			{
-				System.out.println("invalid choice!");
-				System.out.print("Enter your choice: ");
-				choice = kb.nextInt();
+				try
+				{
+					System.out.print("Enter your choice: ");
+					choice = Integer.parseInt(kb.next());
+					kb.nextLine();
+				}
+				catch(Exception e)
+				{
+					System.out.println("invalid choice!");
+				}
 			}
 
 			//Sets attackBehavior to array index that user chose
