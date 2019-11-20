@@ -44,6 +44,10 @@ public abstract class Hero extends DungeonCharacter
 	super(namePI, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
 	this.chanceToBlock = chanceToBlock;
   }
+  
+  //Doug Doner Note: Added getters and setters for numTurns
+  public int getNumTurns() { return this.numTurns; }
+  public void setNumTurns(final int numTurns) { this.numTurns = numTurns; }
 
 /*-------------------------------------------------------
 readName obtains a name for the hero from the user
