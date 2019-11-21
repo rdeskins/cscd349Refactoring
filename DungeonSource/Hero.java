@@ -115,11 +115,49 @@ This method is called by: external sources
 	public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
 	    numOfAttacks = attackSpeed/opponent.getAttackSpeed();
-
+	    
 		if (numOfAttacks == 0)
 			numOfAttacks++;
 
 		System.out.println("Number of turns this round is: " + numOfAttacks);
+		
+		do
+		{
+		    int choice = -1;
+			
+			//Iterates through available attacks for user to choose from
+			for(int i = 0; i < attackBehaviors.length; i++)
+				System.out.println(i + 1 + ". " + attackBehaviors[i]);
+
+			
+			//While the choice is outside of the range of the possible attacks array
+			while(choice < 0 || choice > attackBehaviors.length)
+			{
+				try
+				{
+					System.out.print("Enter your choice: ");
+					choice = Integer.parseInt(kb.next());
+					kb.nextLine();
+				}
+				catch(Exception e)
+				{
+					System.out.println("invalid choice!");
+				}
+			}
+
+			//Sets attackBehavior to array index that user chose
+			this.attackBehavior = attackBehaviors[choice - 1];
+
+			
+			//Calls Sorceress.attack(), passing opponent as a parameter
+			this.attack(opponent);
+
+			this.numOfAttacks--;
+			if (numOfAttacks > 0)
+				System.out.println("Number of turns remaining is: " + numOfAttacks);
+
+		} while(numOfAttacks > 0 && opponent.isAlive());
+
 
 	}//end battleChoices
 
