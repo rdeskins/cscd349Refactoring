@@ -74,11 +74,11 @@ public class Warrior extends Hero
 			//Calls Sorceress.attack(), passing opponent as a parameter
 			this.attack(opponent);
 
-			this.numTurns--;
-			if (numTurns > 0)
-				System.out.println("Number of turns remaining is: " + numTurns);
+			this.numOfAttacks--;
+			if (numOfAttacks > 0)
+				System.out.println("Number of turns remaining is: " + numOfAttacks);
 
-		} while(numTurns > 0 && opponent.isAlive());
+		} while(numOfAttacks > 0 && opponent.isAlive());
 
     }//end battleChoices method
 
