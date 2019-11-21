@@ -5,7 +5,7 @@ public class WarriorAttackBehavior implements AttackBehavior {
     @Override
     public void attack(DungeonCharacter hero, String displayName, DungeonCharacter opponent)
     {
-		System.out.println(displayName + " casts a spell of fireball at " +
+		System.out.println(displayName + " swings their sword at " +
 				opponent.getName() + ":");
 		
 		//Call to base attack behavior, common to all hero types
