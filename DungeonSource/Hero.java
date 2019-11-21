@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /**
  * Title: Hero.java
@@ -9,7 +9,7 @@
  *
  *  class variables (all are directly accessible from derived classes):
  *    chanceToBlock -- a hero has a chance to block an opponents attack
- *    numTurns -- if a hero is faster than opponent, their is a possibility
+ *    numOfAttacks -- if a hero is faster than opponent, their is a possibility
  *                for more than one attack per round of battle
  *
  *  class methods (all are public):
@@ -31,18 +31,23 @@
 public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
-	protected int numTurns;
+	protected int numOfAttacks;
+	
+
 
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
   public Hero(String name, int hitPoints, int attackSpeed,
 				     double chanceToHit, int damageMin, int damageMax,
-					 double chanceToBlock)
+					 double chanceToBlock, String displayName)
   {
-	super(name, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
+	super(displayName, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
 	this.chanceToBlock = chanceToBlock;
-	readName();
   }
+  
+  //Doug Doner Note: Added getters and setters for numOfAttacks
+  public int getnumOfAttacks() { return this.numOfAttacks; }
+  public void setnumOfAttacks(final int numOfAttacks) { this.numOfAttacks = numOfAttacks; }
 
 /*-------------------------------------------------------
 readName obtains a name for the hero from the user
@@ -53,11 +58,6 @@ Returns: nothing
 This method calls: nothing
 This method is called by: hero constructor
 ---------------------------------------------------------*/
-  public void readName()
-  {
-		System.out.print("Enter character name: ");
-		name = Keyboard.readString();
-  }//end readName method
 
 /*-------------------------------------------------------
 defend determines if hero blocks attack
@@ -112,14 +112,14 @@ Returns: nothing
 This method calls: getAttackSpeed()
 This method is called by: external sources
 ---------------------------------------------------------*/
-	public void battleChoices(DungeonCharacter opponent)
+	public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
-	    numTurns = attackSpeed/opponent.getAttackSpeed();
+	    numOfAttacks = attackSpeed/opponent.getAttackSpeed();
 
-		if (numTurns == 0)
-			numTurns++;
+		if (numOfAttacks == 0)
+			numOfAttacks++;
 
-		System.out.println("Number of turns this round is: " + numTurns);
+		System.out.println("Number of turns this round is: " + numOfAttacks);
 
 	}//end battleChoices
 

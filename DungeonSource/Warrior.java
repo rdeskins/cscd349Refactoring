@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 /**
  * Title:
@@ -15,70 +15,70 @@
 public class Warrior extends Hero
 {
 
-    public Warrior()
+    public Warrior(String name)
 	{
 
-		super("Warrior", 125, 4, .8, 35, 60, .2);
-
-
+		super("Warrior", 125, 4, .8, 35, 60, .2,name );
+		
+		//This is an array containing all possible attacks for a warrior
+		AttackBehavior[] warriorAttacks = {new WarriorAttackBehavior(), new WarriorCrushingBlowBehavior()};
+		
+		//This sets the attackBehaviors array in the parent DungeonCharacter class
+		this.setAttackBehaviors(warriorAttacks);
+		
     }//end constructor
-
-
-	public void crushingBlow(DungeonCharacter opponent)
-	{
-		if (Math.random() <= .4)
-		{
-			int blowPoints = (int)(Math.random() * 76) + 100;
-			System.out.println(name + " lands a CRUSHING BLOW for " + blowPoints
-								+ " damage!");
-			opponent.subtractHitPoints(blowPoints);
-		}//end blow succeeded
-		else
-		{
-			System.out.println(name + " failed to land a crushing blow");
-			System.out.println();
-		}//blow failed
-
-	}//end crushingBlow method
 
 	public void attack(DungeonCharacter opponent)
 	{
-		System.out.println(name + " swings a mighty sword at " +
-							opponent.getName() + ":");
-		super.attack(opponent);
+		
+		//This attack is set at runtime when user chooses which attack to use
+		this.attackBehavior.attack(this, name, opponent);
 	}//end override of attack method
 
 
+	
 
-
-    public void battleChoices(DungeonCharacter opponent)
+    public void battleChoices(DungeonCharacter opponent,Scanner kb)
 	{
-		int choice;
+		int choice = -1;
 
-		super.battleChoices(opponent);
+		super.battleChoices(opponent, kb);
 
 		do
 		{
-		    System.out.println("1. Attack Opponent");
-		    System.out.println("2. Crushing Blow on Opponent");
-		    System.out.print("Choose an option: ");
-		    choice = Keyboard.readInt();
+			
+			//Iterates through available attacks for user to choose from
+			for(int i = 0; i < attackBehaviors.length; i++)
+				System.out.println(i + 1 + ". " + attackBehaviors[i]);
 
-		    switch (choice)
-		    {
-			    case 1: attack(opponent);
-			        break;
-			    case 2: crushingBlow(opponent);
-			        break;
-			    default:
-			        System.out.println("invalid choice!");
-		    }//end switch
+			
+			//While the choice is outside of the range of the possible attacks array
+			while(choice < 0 || choice > attackBehaviors.length)
+			{
+				try
+				{
+					System.out.print("Enter your choice: ");
+					choice = Integer.parseInt(kb.next());
+					kb.nextLine();
+				}
+				catch(Exception e)
+				{
+					System.out.println("invalid choice!");
+				}
+			}
 
-			numTurns--;
-			if (numTurns > 0)
-			    System.out.println("Number of turns remaining is: " + numTurns);
+			//Sets attackBehavior to array index that user chose
+			this.attackBehavior = attackBehaviors[choice - 1];
 
-		} while(numTurns > 0);
+			
+			//Calls Sorceress.attack(), passing opponent as a parameter
+			this.attack(opponent);
+
+			this.numOfAttacks--;
+			if (numOfAttacks > 0)
+				System.out.println("Number of turns remaining is: " + numOfAttacks);
+
+		} while(numOfAttacks > 0 && opponent.isAlive());
 
     }//end battleChoices method
 
