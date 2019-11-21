@@ -16,59 +16,59 @@ public class Thief extends Hero
 	{
 		super("Thief", 75, 6, .8, 20, 40, .5,name);
 
-
+		//Creating BaseAttackBehavior array,
+		AttackBehavior[] thiefAttacks = {new BaseAttackBehavior(), new ThiefSurpriseAttackBehavior()};
+		this.setAttackBehaviors(thiefAttacks);
     }//end constructor
 
-	public void surpriseAttack(DungeonCharacter opponent)
+	public void attack(DungeonCharacter opponent)
 	{
-		double surprise = Math.random();
-		if (surprise <= .4)
-		{
-			System.out.println("Surprise attack was successful!\n" +
-								name + " gets an additional turn.");
-			numTurns++;
-			attack(opponent);
-		}//end surprise
-		else if (surprise >= .9)
-		{
-			System.out.println("Uh oh! " + opponent.getName() + " saw you and" +
-								" blocked your attack!");
-		}
-		else
-		    attack(opponent);
-
-
-	}//end surpriseAttack method
-
-
+		
+		//This attack is set at runtime when user chooses which attack to use
+		this.attackBehavior.attack(this, name, opponent);
+	}//end override of attack method
+    
     public void battleChoices(DungeonCharacter opponent, Scanner kb)
 	{
-		super.battleChoices(opponent,kb);
-		int choice;
+		int choice = -1;
 
+		super.battleChoices(opponent, kb);
 
 		do
 		{
-		    System.out.println("1. Attack Opponent");
-		    System.out.println("2. Surprise Attack");
-		    System.out.print("Choose an option: ");
-		    choice = kb.nextInt();
+			
+			//Iterates through available attacks for user to choose from
+			for(int i = 0; i < attackBehaviors.length; i++)
+				System.out.println(i + 1 + ". " + attackBehaviors[i]);
 
-		    switch (choice)
-		    {
-			    case 1: attack(opponent);
-			        break;
-			    case 2: surpriseAttack(opponent);
-			        break;
-			    default:
-			        System.out.println("invalid choice!");
-		    }//end switch
+			
+			//While the choice is outside of the range of the possible attacks array
+			while(choice < 0 || choice > attackBehaviors.length)
+			{
+				try
+				{
+					System.out.print("Enter your choice: ");
+					choice = Integer.parseInt(kb.next());
+					kb.nextLine();
+				}
+				catch(Exception e)
+				{
+					System.out.println("invalid choice!");
+				}
+			}
 
-			numTurns--;
+			//Sets attackBehavior to array index that user chose
+			this.attackBehavior = attackBehaviors[choice - 1];
+
+			
+			//Calls Sorceress.attack(), passing opponent as a parameter
+			this.attack(opponent);
+
+			this.numTurns--;
 			if (numTurns > 0)
-			    System.out.println("Number of turns remaining is: " + numTurns);
+				System.out.println("Number of turns remaining is: " + numTurns);
 
-		} while(numTurns > 0);
+		} while(numTurns > 0 && opponent.isAlive());
 
     }
 }

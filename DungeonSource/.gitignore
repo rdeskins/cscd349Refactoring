@@ -8,3 +8,14 @@
 /Sorceress.class
 /Thief.class
 /Warrior.class
+/HeroFactory.class
+/MonsterFactory.class
+/AttackBehavior.class
+/BaseAttackBehavior.class
+/SorceressAttackBehavior.class
+/WarriorAttackBehavior.class
+/WarriorCrushingBlowBehavior.class
+/SorceressIncreaseHitpointsBehavior.class
+/ThiefSurpriseAttackBehavior.class
+/ThiefAtttackBehavior.class
+**/*.metadata

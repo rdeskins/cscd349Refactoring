@@ -58,7 +58,7 @@ public class Dungeon
 		do
 		{
 		    theHero = chooseHero();
-		    theMonster = generateMonster();
+		    theMonster = MonsterFactory.createMonster();
 			battle(theHero, theMonster);
 
 		} while (playAgain());
@@ -72,53 +72,46 @@ this task
 ---------------------------------------------------------------------*/
 	public static Hero chooseHero()
 	{
-		int choice;
+		int choice = -1;
 		Hero theHero;
 
+		
 		System.out.println("Choose a hero:\n" +
 					       "1. Warrior\n" +
 						   "2. Sorceress\n" +
 						   "3. Thief");
-		choice = kb.nextInt();
-		kb.nextLine();
+		
+		
+		//While the choice is outside of the range of the possible attacks array
+		while(choice < 1 || choice > 3)
+		{
+			try
+			{
+				System.out.print("Enter your choice: ");
+				choice = Integer.parseInt(kb.next());
+				kb.nextLine();
+			}
+			catch(Exception e)
+			{
+				System.out.println("invalid choice!");
+			}
+		}
+		
 		String name;
 		System.out.print("Enter character name: ");
 		name = kb.nextLine();
 		switch(choice)
 		{
-			case 1: return new Warrior(name);
+			case 1: return HeroFactory.createHero("Warrior", name);
 
-			case 2: return new Sorceress(name);
+			case 2: return HeroFactory.createHero("Sorceress", name);
 
-			case 3: return new Thief(name);
+			case 3: return HeroFactory.createHero("Thief", name);
 
 			default: System.out.println("invalid choice, returning Thief");
-				     return new Thief(name);
+			return HeroFactory.createHero("Thief", name);
 		}//end switch
 	}//end chooseHero method
-
-/*-------------------------------------------------------------------
-generateMonster randomly selects a Monster and returns it.  It utilizes
-a polymorphic reference (Monster) to accomplish this task.
----------------------------------------------------------------------*/
-	public static Monster generateMonster()
-	{
-		int choice;
-
-		choice = (int)(Math.random() * 3) + 1;
-
-		switch(choice)
-		{
-			case 1: return new Ogre();
-
-			case 2: return new Gremlin();
-
-			case 3: return new Skeleton();
-
-			default: System.out.println("invalid choice, returning Skeleton");
-				     return new Skeleton();
-		}//end switch
-	}//end generateMonster method
 
 /*-------------------------------------------------------------------
 playAgain allows gets choice from user to play another game.  It returns
@@ -131,7 +124,8 @@ true if the user chooses to continue, false otherwise.
 		System.out.println("Play again (y/n)?");
 		again = kb.next();
 		
-		return (again.equals('Y') || again.equals('y'));
+		//Updates playAgain() method to handle proper string input reading
+		return (again.equals("Y") || again.equals("y"));
 	}//end playAgain method
 
 
