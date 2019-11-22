@@ -70,7 +70,7 @@ chooseHero allows the user to select a hero, creates that hero, and
 returns it.  It utilizes a polymorphic reference (Hero) to accomplish
 this task
 ---------------------------------------------------------------------*/
-	public static Hero chooseHero()
+	private static Hero chooseHero()
 	{
 		int choice = -1;
 		Hero theHero;
@@ -117,7 +117,7 @@ this task
 playAgain allows gets choice from user to play another game.  It returns
 true if the user chooses to continue, false otherwise.
 ---------------------------------------------------------------------*/
-	public static boolean playAgain()
+	private static boolean playAgain()
 	{
 		String again;
 
@@ -135,7 +135,7 @@ and a Monster to be passed in.  Battle occurs in rounds.  The Hero
 goes first, then the Monster.  At the conclusion of each round, the
 user has the option of quitting.
 ---------------------------------------------------------------------*/
-	public static void battle(Hero theHero, Monster theMonster)
+	private static void battle(Hero theHero, Monster theMonster)
 	{
 		String pause = "p";
 		System.out.println(theHero.getName() + " battles " +
