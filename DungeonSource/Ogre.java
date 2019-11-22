@@ -15,7 +15,8 @@ public class Ogre extends Monster
     public Ogre()
 	{
 		super("Oscar the Ogre", 200, 2, .6, .1, 30, 50, 30, 50);
-
+		this.healBehavior = new MonsterBasicHealBehavior();
+		this.attackBehavior = new BaseAttackBehavior();
 
     }//end constructor
 
@@ -23,8 +24,7 @@ public class Ogre extends Monster
 	{
 		System.out.println(name + " slowly swings a club toward's " +
 							opponent.getName() + ":");
-		super.attack(opponent);
-
+		this.attackBehavior.attack(this, this.getName(), opponent);
 	}//end override of attack
 
 

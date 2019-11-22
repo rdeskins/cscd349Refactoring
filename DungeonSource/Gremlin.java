@@ -15,14 +15,16 @@ public class Gremlin extends Monster
     public Gremlin()
 	{
 		super("Gnarltooth the Gremlin", 70, 5, .8, .4, 15, 30, 20, 40);
-
+		this.healBehavior = new MonsterBasicHealBehavior();
+		this.attackBehavior = new BaseAttackBehavior();
+		
     }//end constructor
 
 	public void attack(DungeonCharacter opponent)
 	{
 		System.out.println(name + " jabs his kris at " +
 							opponent.getName() + ":");
-		super.attack(opponent);
+		this.attackBehavior.attack(this, this.getName(), opponent);
 
 	}//end override of attack
 
