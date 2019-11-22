@@ -21,3 +21,5 @@
 /.classpath
 /.project
 **/*.metadata
+/HealBehavior.class
+/MonsterBasicHealBehavior.class
