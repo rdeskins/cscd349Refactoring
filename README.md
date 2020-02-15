@@ -7,5 +7,6 @@ Download Java, compile the files, and run Dungeon.java
 ## Authors
 **Robin Deskins** - [rdeskins](https://github.com/rdeskins/)\
 **Jessica Holcomb** - [jholcomb94](https://github.com/jholcomb94)\
-**Doug Doner** - [dougdoner](https://github.com/dougdoner)\
+**Doug Doner** - [dougdoner](https://github.com/dougdoner)
+
 Or see the list of [contributors](https://github.com/rdeskins/cscd349Refactoring/contributors)
